@@ -1,16 +1,18 @@
 <template>
         <Header></Header>
         <div class="contenido">
-            
+            <carrusel />
         </div>
 </template>
 <script>
 
 import Header from '../components/Header.vue'
+import Carrusel from '../components/Carrusel.vue'
 
 export default {
     components: {
-        Header
+        Header,
+        Carrusel
     }
     
 }
