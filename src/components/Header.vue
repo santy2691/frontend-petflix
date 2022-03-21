@@ -7,7 +7,7 @@
 
             </div>
             <div class="seccion seccion3">
-                <Button value="login"></Button>
+                <Button v-if="botonLogin" value="login"></Button>
             </div>
             
         </div>
@@ -16,6 +16,7 @@
 import Button from './Button.vue'
 
 export default {
+    props: ['botonLogin'],
     components : {
         Button
     }

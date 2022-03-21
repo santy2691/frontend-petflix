@@ -1,7 +1,6 @@
 <template>
-        <Header></Header>
-        <div class="contenido">
-            
+        <div>
+            <Header :botonLogin="true"></Header>
         </div>
 </template>
 <script>
