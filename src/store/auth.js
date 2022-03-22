@@ -2,16 +2,24 @@ import { defineStore } from 'pinia'
 
 export const authStore = defineStore('auth', {
     state: () => {
+
+        const auth = localStorage.getItem('auth');
+
+        if (auth) {
+            return JSON.parse(auth);
+        }
+
         return {
             email: null,
             access_token: null,
-            isAuthenticate : false
+            isAuthenticated : false
 
         }
     },
     
     actions: {
         async login(email, password)  {
+            console.log(password);
             const respuesta = await fetch('https://api-santy.herokuapp.com/api/login',{
                 method: "POST",
                 headers: {
@@ -25,7 +33,9 @@ export const authStore = defineStore('auth', {
             if (data.access_token) {
                 this.email = email;
                 this.access_token = data.access_token;
-                this.isAuthenticate = true;
+                this.isAuthenticated = true;
+
+                localStorage.setItem('auth',JSON.stringify({ isAuthenticated: this.isAuthenticated, access_token: this.access_token, email: this.email }));
             }
         }
     }

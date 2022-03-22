@@ -43,11 +43,14 @@ export default {
 
   methods : {
       login() {
-          this.$auth.login(this.email,this.passowrd)
+          this.$auth.login(this.email,this.password)
       }
   }
 }
 </script>
 
 <style scoped>
+.container {
+    width: 600px;
+}
 </style>
