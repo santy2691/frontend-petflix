@@ -12,12 +12,16 @@ export const authStore = defineStore('auth', {
     
     actions: {
         async login(email, password)  {
-            const response = await fetch('hhtps://http://api-santy.herokuapp.com/api/login',{
+            const respuesta = await fetch('https://api-santy.herokuapp.com/api/aplogin',{
                 method: "POST",
-                'content-type' : 'application/json',
-                body: JSON.stringify({email,password})
+                headers: {
+                    'Content-Type' : 'application/json',
+                    'Accept': 'appication/json'
+                },
+                body: JSON.stringify({"email":email ,"password":password})
             })
-            const data = await response.json();
+            const data = await respuesta.json();
+            console.log(data);
             if (data.access_token) {
                 this.email = email;
                 this.access_token = data.access_token;
