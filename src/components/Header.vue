@@ -7,7 +7,7 @@
 
             </div>
             <div class="seccion seccion3">
-                <Button v-if="botonLogin" value="login"></Button>
+                <router-link v-if="botonLogin" to="/login">Login</router-link>
             </div>
             
         </div>
