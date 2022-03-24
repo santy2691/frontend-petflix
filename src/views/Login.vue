@@ -34,11 +34,15 @@ export default {
     },
 
     created() {
-           this.$auth.$subscribe((mutation, state) => {
+        this.$auth.$subscribe((mutation, state) => {
             if (state.isAuthenticated) {
-                this.$router.push('/');
+                this.$router.push('/home');
             }
         })
+
+        if (this.$auth.isAuthenticated) {
+          this.$router.push('/home');
+      } 
     },
 
   methods : {

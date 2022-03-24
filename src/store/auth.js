@@ -19,7 +19,6 @@ export const authStore = defineStore('auth', {
     
     actions: {
         async login(email, password)  {
-            console.log(password);
             const respuesta = await fetch('https://api-santy.herokuapp.com/api/login',{
                 method: "POST",
                 headers: {
@@ -29,7 +28,6 @@ export const authStore = defineStore('auth', {
                 body: JSON.stringify({email ,password})
             })
             const data = await respuesta.json();
-            console.log(data);
             if (data.access_token) {
                 this.email = email;
                 this.access_token = data.access_token;
@@ -38,6 +36,10 @@ export const authStore = defineStore('auth', {
                 localStorage.setItem('auth',JSON.stringify({ isAuthenticated: this.isAuthenticated, access_token: this.access_token, email: this.email }));
             }
         }
+    },
+
+    getters: {
+        loggedIn: (state) => state.isAuthenticated
     }
 })
 

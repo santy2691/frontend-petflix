@@ -1,6 +1,6 @@
 <template>
         <div>
-            <Header :botonLogin="true"></Header>
+            <Header></Header>
         </div>
 </template>
 <script>
@@ -10,7 +10,9 @@ import Header from '../components/Header.vue'
 export default {
     components: {
         Header
-    }
+    },
+
+
     
 }
 </script>
