@@ -33,7 +33,7 @@ const router = createRouter({
 // esto sirve ara proteger las rutas 
 router.beforeEach((to, from, next) => {
   const auth = authStore()
-  if (to.meta.requiresAuth && auth.isLoggedIn) return next('/login')
+  if (from.meta.requiresAuth && !auth.isLoggedIn) return next('/login')
   else return next()
 });
 

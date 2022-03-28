@@ -6,7 +6,8 @@
             <div class="seccion">
             </div>
             <div class="seccion seccion3">
-                <router-link class="login" v-if="apareceBotonLogin" to="/login">Login</router-link>
+                <router-link class="boton" v-if="apareceBotonLogin" to="/login">Login</router-link>
+                <button @click="logout" class="boton" v-if="aparecerBotonLogout">logout</button>
             </div>
             
         </div>
@@ -24,6 +25,15 @@ export default {
     computed: {
         apareceBotonLogin() {
             return !this.$auth.isAuthenticated && !(this.$route.path === "/login");
+        },
+        aparecerBotonLogout() {
+            return this.$auth.isAuthenticated;
+        }
+    },
+
+    methods: {
+        logout() {
+            this.$auth.logout()
         }
     }
 }
@@ -63,7 +73,7 @@ export default {
         margin-right: 20px;
     }
 
-        .login{
+    .boton{
         height: 40px;
         background: none ;
         display:inline-block;
@@ -82,7 +92,7 @@ export default {
     }
 
 
-    .login:hover{
+    .boton:hover{
         color:#000000;
         background-color:#FFFFFF;
         cursor: pointer;
