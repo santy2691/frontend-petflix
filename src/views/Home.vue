@@ -4,14 +4,15 @@
     <div class="container mt-3">
         <Carrusel></Carrusel>
     </div>
-    <button class="btn btn-primary" @click="peliculasGenero('action')">prueba</button>
+    <button @click="prueba">prueba</button>
+    <p v-for="movie in movies" :key="movie.id"></p>
   </div>
 </template>
 
 <script>
 import Header from "../components/Header.vue";
 import Carrusel from "../components/Carrusel.vue";
-
+import { useMovieStore } from '../store/movie'
 import "vue3-carousel/dist/carousel.css";
 
 
@@ -20,25 +21,31 @@ export default {
     Header,
     Carrusel,
   },
+   setup(){
+    const store = useMovieStore();
+    return {
+      store
+    }
+  },
 
 data() {
     return {
-
+      movies: {}
     }
 },
+
+ created() {
+   this.cargarPelis();
+},
   methods: {
-      async peliculasGenero(genero) {
-          const respuesta = await fetch('https://api-santy.herokuapp.com/api/peliculas/genero/' + genero,{
-                method: "GET",
-                headers: {
-                    'Content-Type' : 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': 'Bearer ' + this.$auth.getToken
-                }
-          });
-          const data = await respuesta.json();
-          console.log(data);
-      }
+        async cargarPelis() {
+        await this.store.getPeliculasPorGenero();
+         this.movies =  this.store.movies;
+         console.log(this.movies);
+       }
   },
+  prueba() {
+    console.log(this.movies);
+  }
 };
 </script>

@@ -7,21 +7,7 @@
       <Carousel :settings="settings" :breakpoints="breakpoints">
         <Slide v-for="slide in 10" :key="slide">
           <div class="carousel__item">
-            <div class="card" style="width: 18rem">
-              <img
-                src="/public/dog-5213090_1920.jpg"
-                class="card-img-top"
-                alt="..."
-              />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
+            <CardPelicula urlImage="./dog-5213090_1920.jpg"></CardPelicula>
           </div>
         </Slide>
 
@@ -35,6 +21,7 @@
 
 <script>
 import "vue3-carousel/dist/carousel.css";
+import CardPelicula from '../components/CardPelicula.vue';
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
 export default {
@@ -46,6 +33,7 @@ props: ['peliculas'],
     Slide,
     Pagination,
     Navigation,
+    CardPelicula
   },
 
   data: () => ({

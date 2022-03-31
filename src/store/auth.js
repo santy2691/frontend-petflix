@@ -46,14 +46,14 @@ export const authStore = defineStore('auth', {
                 }
             });
             const data = await respuesta.json();
-
+            console.log(data)
             if (data.logout) {
                 localStorage.removeItem('auth');
                 this.email = null;
                 this.access_token = null;
                 this.isAuthenticated = false;
             }
-        }
+        },
     },
 
     getters: {
