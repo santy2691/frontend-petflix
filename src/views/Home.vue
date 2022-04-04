@@ -1,51 +1,81 @@
 <template>
   <div>
     <Header></Header>
-    <div class="container mt-3">
-        <Carrusel></Carrusel>
+    <div class="container mt-5">
+      <Carrusel :peliculas="peliculaPorGenero('action')" genero="action"></Carrusel>
     </div>
-    <button @click="prueba">prueba</button>
-    <p v-for="movie in movies" :key="movie.id"></p>
+    <div class="container mt-5">
+      <Carrusel :peliculas="peliculaPorGenero('comedy')" genero="comedy"></Carrusel>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from "../components/Header.vue";
 import Carrusel from "../components/Carrusel.vue";
-import { useMovieStore } from '../store/movie'
+import { useMovieStore } from "../store/movie";
 import "vue3-carousel/dist/carousel.css";
-
 
 export default {
   components: {
     Header,
     Carrusel,
   },
-   setup(){
+  setup() {
     const store = useMovieStore();
     return {
-      store
-    }
+      store,
+    };
   },
 
-data() {
+  data() {
     return {
-      movies: {}
-    }
-},
-
- created() {
-   this.cargarPelis();
-},
-  methods: {
-        async cargarPelis() {
-        await this.store.getPeliculasPorGenero();
-         this.movies =  this.store.movies;
-         console.log(this.movies);
-       }
+      movies: [],
+    };
   },
-  prueba() {
-    console.log(this.movies);
-  }
+
+  created() {
+    this.cargarPelis();
+  },
+
+  methods: {
+    async cargarPelis() {
+      const respuesta = await fetch(
+        "https://api-santy.herokuapp.com/api/peliculas",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: "Bearer " + this.$auth.access_token,
+          },
+        }
+      );
+
+      this.movies = (await respuesta.json()).data;
+    },
+
+    prueba() {
+      let prueba = this.movies.filter((pelicula) => {
+        let array = pelicula.genero.filter((genero) => genero.name == "action");
+        return array.length == 1;
+      });
+    },
+  
+  
+      peliculaPorGenero(g) {
+      let peliculasPorGenero = this.movies.filter(function(pelicula) {
+        let array = pelicula.genero.filter(function(genero) {
+          return genero.name == g
+        });
+        return array.length == 1;
+      });
+      console.log(peliculasPorGenero);
+      return peliculasPorGenero;
+    },
+  },
+
+  computed: {
+  },
 };
 </script>

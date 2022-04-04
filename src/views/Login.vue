@@ -42,7 +42,7 @@ export default {
 
         if (this.$auth.isAuthenticated) {
           this.$router.push('/home');
-      } 
+        } 
     },
 
   methods : {

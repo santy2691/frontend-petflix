@@ -1,13 +1,13 @@
 <template>
   <div class="container mt-3">
     <div class="title mb-3">
-      <h3>peliculas</h3>
+      <h3>{{genero}}</h3>
     </div>
     <div>
       <Carousel :settings="settings" :breakpoints="breakpoints">
-        <Slide v-for="slide in 10" :key="slide">
+        <Slide v-for="pelicula in peliculas" :key="pelicula.id">
           <div class="carousel__item">
-            <CardPelicula urlImage="./dog-5213090_1920.jpg"></CardPelicula>
+            <CardPelicula :pelicula="pelicula"></CardPelicula>
           </div>
         </Slide>
 
@@ -26,7 +26,7 @@ import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
 export default {
 
-props: ['peliculas'],
+props: ['peliculas','genero'],
 
   components: {
     Carousel,
@@ -35,6 +35,7 @@ props: ['peliculas'],
     Navigation,
     CardPelicula
   },
+
 
   data: () => ({
     // carousel settings

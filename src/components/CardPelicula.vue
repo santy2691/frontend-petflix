@@ -1,14 +1,15 @@
 <template>
   <div>
-    <div class="card" style="width: 18rem">
-      <img :src="urlImage" class="card-img-top" :alt="title" />
+    <div  class="card" style="width: 18rem">
+      <img :src="getUrlFile" class="card-img-top" :alt="title" />
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
+        <h5 class="card-title">{{pelicula.title}}</h5>
         <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          actores:
         </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <p v-for="(actor, index) in pelicula.actores" :key="index">
+          {{actor.name}}
+        </p>
       </div>
     </div>
   </div>
@@ -16,6 +17,18 @@
 
 <script>
 export default {
-    props : ['urlImage','title']
+    props : ['pelicula'],
+
+    computed:  {
+      getUrlFile() {
+        console.log(this.pelicula);
+        return "https://api-santy.herokuapp.com/" + this.pelicula.urlFile;
+      }
+    },
+
 }
 </script>
+
+<style>
+  
+</style>
