@@ -51,8 +51,9 @@ export default {
           },
         }
       );
-
-      this.movies = (await respuesta.json()).data;
+      const data = (await respuesta.json()).data;
+      console.log(data);
+      this.movies = data;
     },
 
     prueba() {
@@ -70,7 +71,6 @@ export default {
         });
         return array.length == 1;
       });
-      console.log(peliculasPorGenero);
       return peliculasPorGenero;
     },
   },

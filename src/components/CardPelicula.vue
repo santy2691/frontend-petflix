@@ -21,7 +21,6 @@ export default {
 
     computed:  {
       getUrlFile() {
-        console.log(this.pelicula);
         return "https://api-santy.herokuapp.com/" + this.pelicula.urlFile;
       }
     },
