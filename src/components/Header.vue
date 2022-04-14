@@ -1,7 +1,7 @@
 <template>
         <div class="cabecera">
             <div class="seccion seccion1">
-                <img src="/public/logo.svg" alt="">
+                <img @click="irAHome" src="/public/logo.svg" alt="">
             </div>
             <div class="seccion">
             </div>
@@ -34,6 +34,11 @@ export default {
     methods: {
         logout() {
             this.$auth.logout()
+            this.$router.push('/')
+        },
+
+        irAHome() {
+             this.$router.push('/home');
         }
     }
 }
@@ -43,6 +48,7 @@ export default {
 
     img {
         width: 120px;
+        cursor: pointer;
     }
 
    .cabecera {

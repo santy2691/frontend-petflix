@@ -25,6 +25,14 @@ const router = createRouter({
       meta : {
         requiresAuth: true
       }
+    },
+
+    {
+      path: '/movie/:id',
+      component: ()=>import('../views/MovieView.vue'),
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })

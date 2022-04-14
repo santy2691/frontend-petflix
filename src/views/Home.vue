@@ -2,10 +2,10 @@
   <div>
     <Header></Header>
     <div class="container mt-5">
-      <Carrusel :peliculas="peliculaPorGenero('action')" genero="action"></Carrusel>
+      <Carrusel :peliculas="movies.action" genero="action"></Carrusel>
     </div>
     <div class="container mt-5">
-      <Carrusel :peliculas="peliculaPorGenero('comedy')" genero="comedy"></Carrusel>
+      <Carrusel :peliculas="movies.comedia" genero="comedy"></Carrusel>
     </div>
   </div>
 </template>
@@ -52,21 +52,31 @@ export default {
         }
       );
       const data = (await respuesta.json()).data;
-      console.log(data);
-      this.movies = data;
-    },
+      let peliculas = {
+        action: [],
+        comedia: []
+      }
 
-    prueba() {
-      let prueba = this.movies.filter((pelicula) => {
-        let array = pelicula.genero.filter((genero) => genero.name == "action");
+      peliculas.action = data.filter(function (pelicula) {
+        let array = pelicula.genero.filter(function (genero) {
+          return genero.name == "action"
+        });
         return array.length == 1;
       });
+
+      peliculas.comedia = data.filter(function (pelicula) {
+        let array = pelicula.genero.filter(function (genero) {
+          return genero.name == "comedy"
+        });
+        return array.length == 1;
+      });
+      this.movies = peliculas;
     },
-  
-  
-      peliculaPorGenero(g) {
-      let peliculasPorGenero = this.movies.filter(function(pelicula) {
-        let array = pelicula.genero.filter(function(genero) {
+
+
+    peliculaPorGenero(g) {
+      let peliculasPorGenero = this.movies.filter(function (pelicula) {
+        let array = pelicula.genero.filter(function (genero) {
           return genero.name == g
         });
         return array.length == 1;

@@ -60,3 +60,13 @@ props: ['peliculas','genero'],
   }),
 };
 </script>
+
+<style>
+  .carousel__item {
+    width: 18rem;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  }
+</style>
