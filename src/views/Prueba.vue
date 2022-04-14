@@ -2,24 +2,22 @@
   <div>
     <Header></Header>
     <div class="container mt-5">
-      <Carrusel :peliculas="movies.action" genero="action"></Carrusel>
-    </div>
-    <div class="container mt-5">
-      <Carrusel :peliculas="movies.comedia" genero="comedy"></Carrusel>
+      <div v-for="movie in movies.action" :key="movie.id">
+          <CardPelicula :pelicula="movie" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Header from "../components/Header.vue";
-import Carrusel from "../components/Carrusel.vue";
 import { useMovieStore } from "../store/movie";
-import "vue3-carousel/dist/carousel.css";
+import CardPelicula from "../components/CardPelicula.vue"
 
 export default {
   components: {
     Header,
-    Carrusel,
+    CardPelicula
   },
   setup() {
     const store = useMovieStore();

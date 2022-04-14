@@ -28,6 +28,10 @@ const router = createRouter({
     },
 
     {
+      path: '/prueba',  component: ()=>import('../views/Prueba.vue'),
+    },
+
+    {
       path: '/movie/:id',
       component: ()=>import('../views/MovieView.vue'),
       meta: {
